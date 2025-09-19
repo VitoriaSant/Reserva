@@ -20,4 +20,18 @@ export class SalaService {
         });
         return sala;
     }
+    async update(id: number, data: Partial<SalaDto>) {
+        const sala = await this.prisma.sala.update({
+            where: { id },
+            data,
+        });
+        return sala;
+    }
+    async remove(id: number) {
+        await this.prisma.sala.delete({
+            where: { id },
+        });
+        return { message: 'Sala deletada com sucesso' };
+    }
 }
+

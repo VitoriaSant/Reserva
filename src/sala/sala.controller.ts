@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { SalaService } from './sala.service';
 import { type SalaDto } from './sala.dto';
 
@@ -16,5 +16,13 @@ export class SalaController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.salaService.findOne(Number(id));
+  }
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() data: Partial<SalaDto>) {
+    return this.salaService.update(Number(id), data);
+  }
+  @Delete(':id')  
+  async remove(@Param('id') id: string) {
+    return this.salaService.remove(Number(id));
   }
 }
