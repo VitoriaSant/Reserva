@@ -10,4 +10,14 @@ export class SalaService {
         const sala = await this.prisma.sala.create({ data });
         return sala;
     }
+    async findAll() {
+        const salas = await this.prisma.sala.findMany();
+        return salas;
+    }
+    async findOne(id: number) {
+        const sala = await this.prisma.sala.findUnique({
+            where: { id },
+        });
+        return sala;
+    }
 }

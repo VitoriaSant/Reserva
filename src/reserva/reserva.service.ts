@@ -18,5 +18,18 @@ export class ReservaService {
         });
         return reserva;
     }
+    async findAll() {
+        const reservas = await this.prisma.reserva.findMany({
+            include: { Sala: true, Usuario: true },
+        });
+        return reservas;
+    }
+    async findOne(id: number) {
+        const reserva = await this.prisma.reserva.findUnique({
+            where: { id },
+            include: { Sala: true, Usuario: true },
+        });
+        return reserva;
+    }
 
 }
