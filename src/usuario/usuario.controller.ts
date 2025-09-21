@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post, Param, Put, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, Delete, UseGuards } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { type UsuarioDto } from './usuario.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -10,6 +11,8 @@ export class UsuarioController {
     async create(@Body() data: UsuarioDto) {
         return this.usuarioService.create(data);
     }
+
+    @UseGuards(AuthGuard)
     @Get()
     async findAll() {
         return this.usuarioService.findAll();
