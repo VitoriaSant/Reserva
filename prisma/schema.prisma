@@ -25,7 +25,7 @@ model Usuario {
 
 model Sala {
   id          Int      @id @default(autoincrement())
-  nome        String
+  nome        String   @unique
   capacidade  Int
   descSala    String
   Reservas    Reserva[]

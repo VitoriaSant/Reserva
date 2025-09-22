@@ -5,28 +5,33 @@ import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('usuario')
 export class UsuarioController {
+  constructor(private readonly usuarioService: UsuarioService) {}
+  @Post()
+  async create(@Body() data: UsuarioDto) {
+    return this.usuarioService.create(data);
+  }
 
-    constructor (private readonly usuarioService:UsuarioService) {}
-    @Post()
-    async create(@Body() data: UsuarioDto) {
-        return this.usuarioService.create(data);
-    }
+  @UseGuards(AuthGuard)
+  @Get()
+  async findAll() {
+    return this.usuarioService.findAll();
+  }
 
-    @UseGuards(AuthGuard)
-    @Get()
-    async findAll() {
-        return this.usuarioService.findAll();
-    }
-    @Get(':id')
-    async findOne(@Param('id') id: string) {
-        return this.usuarioService.findOne(Number(id));
-    }
-    @Put(':id')
-    async update(@Param('id') id: string, @Body() data: Partial<UsuarioDto>) {
-        return this.usuarioService.update(Number(id), data);
-    }
-    @Delete(':id')
-    async remove(@Param('id') id: string) {
-        return this.usuarioService.remove(Number(id));
-    }
+  @UseGuards(AuthGuard)
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.usuarioService.findOne(Number(id));
+  }
+
+  @UseGuards(AuthGuard)
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() data: Partial<UsuarioDto>) {
+    return this.usuarioService.update(Number(id), data);
+  }
+  
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.usuarioService.remove(Number(id));
+  }
 }
