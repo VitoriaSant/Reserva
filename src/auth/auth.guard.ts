@@ -27,6 +27,7 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
+  //Indicado pela documentação do NestJS, mas não funcionou
   // private extractTokenFromHeader(request: Request): string | undefined {
   //   const [type, token] = request.headers.get('token')?.split(' ') ?? [];
   //   return type === 'Bearer' ? token : undefined;
