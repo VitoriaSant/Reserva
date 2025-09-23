@@ -25,7 +25,7 @@ export class AuthService {
     if (!senhaValida) {
       throw new UnauthorizedException('Senha inválida');
     }
-
+    
     const payload = { sub: usuario.id, nivelAcesso: usuario.nivelAcesso };
 
     return { acess_token: await this.jwtService.signAsync(payload) };

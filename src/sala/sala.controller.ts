@@ -6,30 +6,30 @@ import { AuthGuard } from '../auth/auth.guard';
 @Controller('sala')
 export class SalaController {
   constructor(private readonly salaService: SalaService) {}
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard(true))
   @Post()
   async create(@Body() data: SalaDto) {
     return this.salaService.create(data);
   }
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard())
   @Get()
   async findAll() {
     return this.salaService.findAll();
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard())
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.salaService.findOne(Number(id));
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard(true))
   @Put(':id')
   async update(@Param('id') id: string, @Body() data: Partial<SalaDto>) {
     return this.salaService.update(Number(id), data);
   }
-  
-  @UseGuards(AuthGuard)
+
+  @UseGuards(AuthGuard(true))
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.salaService.remove(Number(id));
