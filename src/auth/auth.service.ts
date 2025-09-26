@@ -1,5 +1,7 @@
 import {
+  BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -19,6 +21,13 @@ export class AuthService {
     const usuario = await this.usuarioService.findByEmail(dto.email);
     if (!usuario) {
       throw new NotFoundException('Usuário não encontrado');
+    }
+    if (!dto.senha) {
+      throw new BadRequestException('Senha é obrigatória');
+    }
+
+    if (!usuario.senha) {
+      throw new InternalServerErrorException('Senha do usuário não encontrada');
     }
 
     const senhaValida = await bcrypt.compare(dto.senha, usuario.senha);
